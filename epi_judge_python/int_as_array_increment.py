@@ -1,6 +1,7 @@
 from test_framework import generic_test
 
-# https://leetcode.com/problems/plus-one/submissions/
+# 66. https://leetcode.com/problems/plus-one/
+# 5.2
 def plus_one(A):
     A[-1]+=1
     for i in range(len(A)-1, 0, -1):
