@@ -8,8 +8,13 @@ from test_framework.test_utils import enable_executor_hook
 
 
 def random_sampling(k, A):
-    for _ in range(len(A)-k):
-        A.pop(random.randrange(0, len(A)))
+    if k > (len(A)-k):
+        for _ in range(len(A)-k):
+            A.pop(random.randrange(0, len(A)))
+    else:
+        for i in range(k):
+            r = random.randrange(i, len(A))
+            A[i], A[r] = A[r], A[i]
     return A
 
 
