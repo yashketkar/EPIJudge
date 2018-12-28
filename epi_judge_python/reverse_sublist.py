@@ -1,9 +1,21 @@
+from list_node import ListNode
 from test_framework import generic_test
 
 
 def reverse_sublist(L, start, finish):
-    # TODO - you fill in here.
-    return None
+    if not L:
+        return None
+    if not start and not finish:
+        return L
+    dummy_head = sublist_head = ListNode(0, L)
+    for _ in range(1, start):
+        sublist_head = sublist_head.next
+    
+    sublist_iter = sublist_head.next
+    for _ in range(finish - start):
+        temp = sublist_iter.next
+        sublist_iter.next, temp.next, sublist_head.next = (temp.next, sublist_head.next, temp)
+    return dummy_head.next
 
 
 if __name__ == '__main__':
