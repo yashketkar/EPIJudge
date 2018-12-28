@@ -3,10 +3,6 @@ from test_framework import generic_test
 
 
 def reverse_sublist(L, start, finish):
-    if not L:
-        return None
-    if not start and not finish:
-        return L
     dummy_head = sublist_head = ListNode(0, L)
     for _ in range(1, start):
         sublist_head = sublist_head.next
