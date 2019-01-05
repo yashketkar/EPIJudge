@@ -5,10 +5,25 @@ from test_framework.binary_tree_utils import must_find_node
 from test_framework.test_failure import TestFailure
 from test_framework.test_utils import enable_executor_hook
 
-
+# 9.4
 def lca(node0, node1):
-    # TODO - you fill in here.
-    return None
+    first = node0
+    height_of_first = 0
+    while first:
+        height_of_first += 1
+        first = first.parent
+    second = node1
+    height_of_second = 0
+    while second:
+        height_of_second += 1
+        second = second.parent
+    deeper, other = (node0,node1) if height_of_first>height_of_second else (node1,node0)
+    for _ in range(abs(height_of_first-height_of_second)):
+        deeper = deeper.parent
+    while deeper != other:
+        deeper = deeper.parent
+        other = other.parent
+    return deeper
 
 
 @enable_executor_hook
