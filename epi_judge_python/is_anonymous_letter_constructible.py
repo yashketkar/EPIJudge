@@ -1,8 +1,17 @@
+import collections
 from test_framework import generic_test
 
 
 def is_letter_constructible_from_magazine(letter_text, magazine_text):
-    # TODO - you fill in here.
+    ld = collections.Counter(letter_text)
+    md = collections.Counter(magazine_text)
+    
+    for k, v in ld.items():
+        if k in md:
+            if (md[k] - v) < 0:
+                return False
+        else:
+            return False
     return True
 
 

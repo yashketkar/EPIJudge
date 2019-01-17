@@ -1,24 +1,36 @@
+import collections
+
 from test_framework import generic_test
 from test_framework.test_failure import TestFailure
 
 
 class LruCache:
     def __init__(self, capacity):
-        # TODO - you fill in here.
+        self.od = collections.OrderedDict()
+        self.capacity = capacity
         return
 
     def lookup(self, isbn):
-        # TODO - you fill in here.
-        return 0
+        if isbn in self.od:
+            self.od.move_to_end(isbn, last=False)
+            return self.od[isbn]
+        return -1
 
     def insert(self, isbn, price):
-        # TODO - you fill in here.
+        if isbn in self.od:
+            self.od.move_to_end(isbn, last=False)
+            return
+        self.od.update({isbn:price})
+        self.od.move_to_end(isbn, last=False)
+        if len(self.od) > self.capacity:
+            self.od.popitem()
         return
 
     def erase(self, isbn):
-        # TODO - you fill in here.
-        return True
-
+        if isbn in self.od:
+            self.od.pop(isbn)
+            return True
+        return False
 
 def run_test(commands):
     if len(commands) < 1 or commands[0][0] != 'LruCache':
@@ -44,6 +56,7 @@ def run_test(commands):
 
 
 if __name__ == '__main__':
+    # import ipdb; ipdb.set_trace()
     exit(
         generic_test.generic_test_main("lru_cache.py", 'lru_cache.tsv',
                                        run_test))
