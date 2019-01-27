@@ -7,9 +7,15 @@ from test_framework.test_utils import enable_executor_hook
 NUM_PEGS = 3
 
 
+def hanoi(n, s, t, h):
+    if n==1:
+        return [(s,t)]
+    return hanoi(n-1, s, h, t) + [(s,t)] + hanoi(n-1, h, t, s)
+
+
 def compute_tower_hanoi(num_rings):
-    # TODO - you fill in here.
-    return []
+    source, target, helper = range(3)
+    return hanoi(num_rings, source, target, helper)
 
 
 @enable_executor_hook
