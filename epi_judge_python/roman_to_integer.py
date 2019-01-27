@@ -8,8 +8,7 @@ def roman_to_integer(s):
     total, i = 0, 0
     while i < len(s):
         if (i+1)<len(s) and mapping[s[i]] < mapping[s[i+1]]:
-            total += mapping[s[i+1]]-mapping[s[i]]
-            i += 1
+            total -= mapping[s[i]]
         else:
             total += mapping[s[i]]
         i += 1
