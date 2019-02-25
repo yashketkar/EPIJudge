@@ -2,8 +2,15 @@ from test_framework import generic_test
 
 
 def rotate_matrix(square_matrix):
-    # TODO - you fill in here.
-    return
+    n = len(square_matrix)
+    for i in range(n//2):
+        for j in range(i, n-i-1):
+            temp = square_matrix[i][j]
+            square_matrix[i][j] = square_matrix[n-j-1][i]
+            square_matrix[n-j-1][i] = square_matrix[n-i-1][n-j-1]
+            square_matrix[n-i-1][n-j-1] = square_matrix[j][n-i-1]
+            square_matrix[j][n-i-1] = temp
+    return square_matrix
 
 
 def rotate_matrix_wrapper(square_matrix):

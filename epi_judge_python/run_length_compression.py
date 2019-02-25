@@ -3,13 +3,28 @@ from test_framework.test_failure import TestFailure
 
 
 def decoding(s):
-    # TODO - you fill in here.
-    return ''
+    count, result = 0, []
+    for c in s:
+        if c.isdigit():
+            count = count*10 + int(c)
+        else:
+            result.append(count * c)
+            count = 0
+    return ''.join(result)
 
 
 def encoding(s):
-    # TODO - you fill in here.
-    return ''
+    i = 0
+    result = []
+    while i < len(s):
+        count = 1
+        while i+1<len(s) and s[i]==s[i+1]:
+            count += 1
+            i += 1
+        result.append(str(count))
+        result.append(s[i])
+        i += 1
+    return ''.join(result)
 
 
 def rle_tester(encoded, decoded):
